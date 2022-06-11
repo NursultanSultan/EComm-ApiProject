@@ -10,12 +10,15 @@ namespace ECommerseApi.Application.Repositories.Interfaces
     public interface IWriteRepository<T> : IRepository<T> where T : BaseEntity 
     {
         Task<bool> AddAsync(T entity);
-        Task<bool> AddAsync(List<T> entities);
+        Task<bool> AddRangeAsync(List<T> entities);
 
-        Task<bool> RemoveAsync(T entity);
+        bool Remove(T entity);
+        bool RemoveRange(List<T> entities);
         Task<bool> RemoveByIdAsync(string Id);
 
-        Task<bool> UpdateAsync(T entity);
+        bool Update(T entity);
+
+        Task SaveChangeAsync();
     }
     
 }

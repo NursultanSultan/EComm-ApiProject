@@ -16,6 +16,6 @@ namespace ECommerseApi.Application.Repositories.Interfaces
 
         Task<T> GetOneWhereAsync(Expression<Func<T, bool>> method);
 
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(string id);
     }
 }

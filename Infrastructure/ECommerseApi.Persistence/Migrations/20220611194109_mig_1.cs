@@ -69,7 +69,7 @@ namespace ECommerseApi.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_OrderProduct", x => new { x.OrdersId, x.ProductsId });
-                    table.ForeignKey(
+                    table.ForeignKey(  
                         name: "FK_OrderProduct_Orders_OrdersId",
                         column: x => x.OrdersId,
                         principalTable: "Orders",

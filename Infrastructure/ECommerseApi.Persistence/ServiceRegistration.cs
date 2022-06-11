@@ -15,14 +15,14 @@ namespace ECommerseApi.Persistence
     {
         public static void AddPersistenceServices(this IServiceCollection service)
         {
-            service.AddDbContext<ApiDbContext>(options => options.UseNpgsql(Configuration.ConnectionString));
+            service.AddDbContext<ApiDbContext>(options => options.UseNpgsql(Configuration.ConnectionString) , ServiceLifetime.Singleton);
             
-            service.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
-            service.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
-            service.AddScoped<IOrderReadRepository, OrderReadRepository>();
-            service.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
-            service.AddScoped<IProductReadRepository, ProductReadRepository>();
-            service.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+            service.AddSingleton<ICustomerReadRepository, CustomerReadRepository>();
+            service.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>();
+            service.AddSingleton<IOrderReadRepository, OrderReadRepository>();
+            service.AddSingleton<IOrderWriteRepository, OrderWriteRepository>();
+            service.AddSingleton<IProductReadRepository, ProductReadRepository>();
+            service.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
 
         }
     }

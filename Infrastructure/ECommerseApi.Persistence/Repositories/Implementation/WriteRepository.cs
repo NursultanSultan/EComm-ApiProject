@@ -9,7 +9,7 @@ namespace ECommerseApi.Persistence.Repositories.Implementation
 {
     public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
     {
-        public readonly ApiDbContext _dbContext;
+        private readonly ApiDbContext _dbContext;
 
         public WriteRepository(ApiDbContext dbContext)
         {

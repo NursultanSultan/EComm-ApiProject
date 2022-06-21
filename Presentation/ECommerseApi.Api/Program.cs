@@ -1,4 +1,6 @@
+using ECommerseApi.Application.Validators.ProductValidators;
 using ECommerseApi.Persistence;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,14 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddPersistenceServices();
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+                .AddFluentValidation(option => option.RegisterValidatorsFromAssemblyContaining<ProductCreateValidator>())
+                    .ConfigureApiBehaviorOptions(option => option.SuppressModelStateInvalidFilter = true);
+    
+
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:4200/",
-                                "https://localhost:4200/").AllowAnyHeader().AllowAnyMethod();
+            //policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+            policy.WithOrigins("http://localhost:4200",
+                                "https://localhost:4200").AllowAnyHeader().AllowAnyMethod();
         });
 });
 

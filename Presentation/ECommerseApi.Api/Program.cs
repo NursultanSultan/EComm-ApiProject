@@ -1,4 +1,5 @@
 using ECommerseApi.Application.Validators.ProductValidators;
+using ECommerseApi.Infrastructure.Filters;
 using ECommerseApi.Persistence;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddPersistenceServices();
-builder.Services.AddControllers()
+builder.Services.AddControllers(option => option.Filters.Add<ValidationFilter>())
                 .AddFluentValidation(option => option.RegisterValidatorsFromAssemblyContaining<ProductCreateValidator>())
                     .ConfigureApiBehaviorOptions(option => option.SuppressModelStateInvalidFilter = true);
     
